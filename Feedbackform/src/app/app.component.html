@@ -1,0 +1,141 @@
+<div class="container">
+  <div class="row blanckSpace">
+
+  </div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+      <mat-card>
+        <div class="headerStyle">
+          <p>Feedback Form</p>
+          <small>Help us to serve you better</small>
+        </div>
+        <mat-horizontal-stepper #stepper>
+          <mat-step>
+              <ng-template matStepLabel>Rate our product</ng-template>
+              <small>Rate our service between 1 to 5</small>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Rate the app user experience</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="buttonStyle">
+                    <span *ngFor="let noOfButtons of totalButtons" (click)="uxRating = noOfButtons"
+                      [ngClass]="{'selectedButton' : uxRating === noOfButtons}">
+                      <button mat-mini-fab> {{noOfButtons}} </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Rate your food ordering experience</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="buttonStyle">
+                    <span *ngFor="let noOfButtons of totalButtons" (click)="foodOrderingRating = noOfButtons"
+                      [ngClass]="{'selectedButton' : foodOrderingRating === noOfButtons}">
+                      <button mat-mini-fab> {{noOfButtons}} </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Rate the app performance</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="buttonStyle">
+                    <span *ngFor="let noOfButtons of totalButtons" (click)="appPerformance = noOfButtons"
+                      [ngClass]="{'selectedButton' : appPerformance === noOfButtons}">
+                      <button mat-mini-fab> {{noOfButtons}} </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Please rate your over all experience</label>
+                </div>
+                <div class="col-md-6">
+                  <div class="buttonStyle">
+                    <span *ngFor="let noOfButtons of totalButtons" (click)="overAllRating = noOfButtons"
+                      id="{{noOfButtons}}" [ngClass]="{'selectedButton' : overAllRating === noOfButtons}">
+                      <button mat-mini-fab> {{noOfButtons}} </button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+
+              <div>
+                <button mat-raised-button color="primary" matStepperNext>Next</button>
+              </div>
+          </mat-step>
+          <mat-step [stepControl]="productRatingForm">
+            <form [formGroup]="productRatingForm">
+              <ng-template matStepLabel>Product rating</ng-template>
+              <div class="row">
+                <div class="col-md-4">
+                  <label class="requiredField">Would you like to recommend our product to your families/friends</label>
+                </div>
+                <div class="col-md-5">
+                  Yes <input id="yes" class="buttonSpace" type="radio"  value="yes"  formControlName="recommendationRadioBtn">
+                  No <input id="no" type="radio"  value="no" formControlName="recommendationRadioBtn">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <label class="requiredField">Is our product fulfilled your needs?</label>
+                </div>
+                <div class="col-md-5">
+                  Yes <input id="yes" class="buttonSpace" type="radio"  value="yes"  formControlName="productFulfillmentRadioBtn">
+                  No <input id="no" type="radio"  value="no" formControlName="productFulfillmentRadioBtn">
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <label class="requiredField">Did you faced any issues during payment process</label>
+                </div>
+                <div class="col-md-5">
+                  Yes <input class="buttonSpace" id="yes" type="radio" value="yes" formControlName="paymentRadioBtn">
+                  No <input id="no" type="radio" value="no" formControlName="paymentRadioBtn">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Kindly, Share few words about our product if any</label>
+                </div>
+                  <mat-form-field class="col-md-5">
+                    <mat-label>Leave a comment</mat-label>
+                    <textarea matInput formControlName="comments"></textarea>
+                  </mat-form-field>
+                </div>
+              <div>
+                <button class="buttonSpace" mat-raised-button color="primary" matStepperPrevious>Back</button>
+                <button mat-raised-button color="primary" matStepperNext>Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <p>{{finalText}}</p>
+            <small>After submitting feedback you receive 10% coupon </small>
+            
+            <div style="margin-top: 20px;">
+              <button class="buttonSpace" mat-raised-button matStepperPrevious>Back</button>
+              <button class="btn btn-success" (click)="submit()">Submit</button>
+            </div>
+          </mat-step>
+        </mat-horizontal-stepper>
+      </mat-card>
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
+<router-outlet></router-outlet>
